@@ -2,48 +2,48 @@ import Link from "next/link";
 
 const TEMPLATE_CARDS = [
   {
-    id: "lead-capture",
-    title: "Lead Capture",
+    id: "lead-gen",
+    title: "Lead Generation",
     description:
       "Authoritative, trust-forward design for service businesses. Converts visitors into consultations with a clear CTA funnel.",
     gradient: "linear-gradient(135deg, #2d5016, #4a7c2f)",
     icon: "capture",
   },
   {
-    id: "authority-builder",
-    title: "Authority Builder",
+    id: "saas",
+    title: "SaaS Product",
     description:
       "Dark, precise, and technical. Deep navy with electric blue accents. Product-centric hero with browser mockup preview.",
     gradient: "linear-gradient(135deg, #060b18, #2563eb)",
     icon: "authority",
   },
   {
-    id: "comparison",
-    title: "Comparison",
+    id: "b2b",
+    title: "Professional Services",
     description:
       "Black, white, and amber. High-contrast editorial design with elegant serif typography and clear service differentiation.",
     gradient: "linear-gradient(135deg, #1a1a1a, #d97706)",
     icon: "comparison",
   },
   {
-    id: "calculator",
-    title: "Calculator",
+    id: "event",
+    title: "Event / Launch",
     description:
       "Bold and kinetic with vivid purple-to-pink gradients. Dramatic typography with countdown timers and urgency-driven CTAs.",
     gradient: "linear-gradient(135deg, #7c3aed, #ec4899)",
     icon: "calculator",
   },
   {
-    id: "testimonial-wall",
-    title: "Testimonial Wall",
+    id: "ecommerce",
+    title: "E-Commerce",
     description:
       "Warm, confident, and aspirational. Burnt orange meets teal for a premium but approachable product showcase.",
     gradient: "linear-gradient(135deg, #c2410c, #0d9488)",
     icon: "testimonial",
   },
   {
-    id: "faq-hub",
-    title: "FAQ Hub",
+    id: "custom",
+    title: "Custom Builder",
     description:
       "Modular block-based system with variable brand colors. Mix and match from reusable blocks to build any layout.",
     gradient: "linear-gradient(135deg, #6366f1, #f59e0b)",
