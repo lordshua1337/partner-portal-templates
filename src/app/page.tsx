@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useRef, useState, useCallback, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 import { TEMPLATES } from "@/data/templates"
+import { TAX_RESOLUTION_TOPICS } from "@/data/topics/tax-resolution"
 import FloatingElement from "@/components/motion/FloatingElement"
 import GlowCard from "@/components/motion/GlowCard"
 import FadeIn from "@/components/motion/FadeIn"
@@ -608,6 +609,123 @@ function FeatureIcon({ name }: { readonly name: string }) {
   )
 }
 
+function EducationalTopicsSection() {
+  return (
+    <section style={{ padding: "var(--space-24) var(--space-6)", borderTop: "1px solid var(--border-color)" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <FadeIn>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <p style={{ fontSize: 13, letterSpacing: 3, color: "#0D9488", textTransform: "uppercase", marginBottom: 16, fontWeight: 600, fontFamily: "var(--font-work-sans)" }}>
+              Educational Authority Pages
+            </p>
+            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 800, color: "var(--text-primary)", letterSpacing: "-0.02em", fontFamily: "var(--font-outfit)" }}>
+              Tax Resolution Guides
+            </h2>
+            <p style={{ fontSize: 16, color: "var(--text-secondary)", maxWidth: 560, margin: "12px auto 0", lineHeight: 1.6, fontFamily: "var(--font-work-sans)" }}>
+              In-depth educational landing pages that build trust and convert visitors into consultations.
+            </p>
+          </div>
+        </FadeIn>
+
+        <StaggerChildren
+          stagger={0.1}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+            gap: 28,
+          }}
+        >
+          {TAX_RESOLUTION_TOPICS.map((topic) => (
+            <motion.div key={topic.slug} variants={staggerItem}>
+              <div
+                style={{
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  background: "var(--bg-surface)",
+                  border: "1px solid var(--border-color)",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-4px)"
+                  e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,0,0,0.15)"
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)"
+                  e.currentTarget.style.boxShadow = "none"
+                }}
+              >
+                {/* Color header */}
+                <div
+                  style={{
+                    height: 8,
+                    background: "linear-gradient(135deg, #1E3A5F, #0D9488)",
+                  }}
+                />
+                <div style={{ padding: 28 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+                    <h3 style={{ fontSize: 20, fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.01em", fontFamily: "var(--font-outfit)" }}>
+                      {topic.topic}
+                    </h3>
+                    <span
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 600,
+                        padding: "3px 10px",
+                        borderRadius: 20,
+                        background: "rgba(13, 148, 136, 0.15)",
+                        color: "#0D9488",
+                        letterSpacing: 0.3,
+                        fontFamily: "var(--font-work-sans)",
+                      }}
+                    >
+                      Educational
+                    </span>
+                  </div>
+                  <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.65, marginBottom: 16, fontFamily: "var(--font-work-sans)" }}>
+                    {topic.subheadline}
+                  </p>
+                  <div style={{ display: "flex", gap: 8, marginBottom: 24, flexWrap: "wrap" }}>
+                    <span style={{ fontSize: 11, color: "var(--text-muted)", background: "var(--bg-raised)", padding: "4px 10px", borderRadius: 6, fontFamily: "var(--font-work-sans)" }}>
+                      {topic.resolutionOptions.length} resolution options
+                    </span>
+                    <span style={{ fontSize: 11, color: "var(--text-muted)", background: "var(--bg-raised)", padding: "4px 10px", borderRadius: 6, fontFamily: "var(--font-work-sans)" }}>
+                      {topic.commonQuestions.length} FAQs
+                    </span>
+                    <span style={{ fontSize: 11, color: "var(--text-muted)", background: "var(--bg-raised)", padding: "4px 10px", borderRadius: 6, fontFamily: "var(--font-work-sans)" }}>
+                      {topic.glossary.length} glossary terms
+                    </span>
+                  </div>
+                  <Link
+                    href={`/tax-resolution/${topic.slug}`}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      padding: "12px 28px",
+                      background: "#0D9488",
+                      color: "#fff",
+                      borderRadius: 10,
+                      fontSize: 14,
+                      fontWeight: 600,
+                      transition: "transform 0.15s ease, box-shadow 0.15s ease",
+                      fontFamily: "var(--font-work-sans)",
+                    }}
+                  >
+                    Preview
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14" /><path d="M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </StaggerChildren>
+      </div>
+    </section>
+  )
+}
+
 function CTASection() {
   return (
     <section
@@ -674,6 +792,7 @@ export default function HomePage() {
       <HeroSection />
       <SocialProof />
       <TemplateShowcase />
+      <EducationalTopicsSection />
       <FeaturesSection />
       <CTASection />
       <footer
@@ -684,7 +803,7 @@ export default function HomePage() {
         }}
       >
         <p style={{ fontSize: 13, color: "var(--text-muted)", fontFamily: "var(--font-work-sans)" }}>
-          Partner Portal Templates -- 6 conversion-optimized landing page designs
+          Partner Portal Templates -- 6 landing pages + 3 educational authority pages
         </p>
       </footer>
     </div>
