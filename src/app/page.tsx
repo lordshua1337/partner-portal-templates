@@ -411,55 +411,51 @@ function TemplateShowcase() {
         {TEMPLATES.map((template) => (
           <motion.div key={template.id} variants={staggerItem}>
             <Tilt3DCard gradient={template.gradient}>
-              {/* Gradient preview header with color bar */}
+              {/* Live template preview via iframe */}
               <div
                 style={{
-                  height: 180,
-                  background: template.gradient,
+                  height: 220,
                   position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
                   overflow: "hidden",
+                  background: template.colors.background,
                 }}
               >
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.3) 100%)" }} />
-                {/* Mini browser frame */}
-                <div
+                <iframe
+                  src={`/templates/${template.id}`}
+                  title={`${template.name} preview`}
                   style={{
-                    width: "70%",
-                    height: "65%",
-                    borderRadius: "8px 8px 0 0",
-                    background: "rgba(0,0,0,0.3)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    position: "relative",
-                    zIndex: 1,
-                    overflow: "hidden",
+                    width: 1440,
+                    height: 900,
+                    border: "none",
+                    transform: "scale(0.236)",
+                    transformOrigin: "top left",
+                    pointerEvents: "none",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
                   }}
-                >
-                  {/* Browser dots */}
-                  <div style={{ display: "flex", gap: 4, padding: "6px 10px", background: "rgba(0,0,0,0.3)" }}>
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(255,255,255,0.3)" }} />
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(255,255,255,0.2)" }} />
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(255,255,255,0.2)" }} />
-                  </div>
-                  {/* Mini content lines */}
-                  <div style={{ padding: "8px 12px" }}>
-                    <div style={{ width: "60%", height: 4, background: "rgba(255,255,255,0.2)", borderRadius: 2, marginBottom: 4 }} />
-                    <div style={{ width: "80%", height: 3, background: "rgba(255,255,255,0.1)", borderRadius: 2, marginBottom: 3 }} />
-                    <div style={{ width: "40%", height: 3, background: "rgba(255,255,255,0.1)", borderRadius: 2, marginBottom: 8 }} />
-                    <div style={{ width: "30%", height: 8, background: "rgba(255,255,255,0.15)", borderRadius: 3 }} />
-                  </div>
-                </div>
+                  tabIndex={-1}
+                  loading="lazy"
+                />
+                {/* Gradient overlay at bottom for smooth transition to card body */}
+                <div style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: 40,
+                  background: "linear-gradient(to bottom, transparent, var(--bg-surface))",
+                  zIndex: 2,
+                }} />
                 {/* Color scheme bar */}
                 <div style={{
                   position: "absolute",
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  height: 4,
+                  height: 3,
                   display: "flex",
-                  zIndex: 2,
+                  zIndex: 3,
                 }}>
                   <div style={{ flex: 1, background: template.colors.primary }} />
                   <div style={{ flex: 1, background: template.colors.primaryLight }} />
