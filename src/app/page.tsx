@@ -803,7 +803,7 @@ export default function HomePage() {
         }}
       >
         <p style={{ fontSize: 13, color: "var(--text-muted)", fontFamily: "var(--font-work-sans)" }}>
-          Partner Portal Templates -- 6 landing pages + 3 educational authority pages
+          Partner Portal Templates -- 6 landing pages + 10 educational authority pages
         </p>
       </footer>
     </div>
