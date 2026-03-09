@@ -294,7 +294,7 @@ function HeroSection() {
               fontFamily: "var(--font-work-sans)",
             }}
           >
-            Six distinct, CRO-optimized templates. Each built with a different
+            13 distinct, CRO-optimized templates. Each built with a different
             conversion architecture, advanced animations, and premium visual design.
           </p>
         </FadeIn>
@@ -402,6 +402,8 @@ function TemplateShowcase() {
     "Announcement": "#FF71CE",
     "Digital Product": "#CA8A04",
     "Flexible": "#6366f1",
+    "Professional Services": "#0D9488",
+    "Interactive": "#2563EB",
   }
 
   return (
@@ -412,7 +414,7 @@ function TemplateShowcase() {
             Template Collection
           </p>
           <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 800, color: "var(--text-primary)", letterSpacing: "-0.02em", fontFamily: "var(--font-outfit)" }}>
-            Six Conversion Architectures
+            13 Conversion Architectures
           </h2>
         </div>
       </FadeIn>
@@ -820,7 +822,7 @@ export default function HomePage() {
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
           <p style={{ fontSize: 13, color: "var(--text-muted)", fontFamily: "var(--font-work-sans)" }}>
-            Partner Portal Templates -- 7 landing pages + 10 educational authority pages
+            Partner Portal Templates -- 13 landing pages + 10 educational authority pages
           </p>
           <Link
             href="/setup"

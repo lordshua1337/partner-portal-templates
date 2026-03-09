@@ -13,6 +13,12 @@ const EventTemplate = dynamic(() => import("@/components/templates/EventTemplate
 const EcommerceTemplate = dynamic(() => import("@/components/templates/EcommerceTemplate"))
 const CustomTemplate = dynamic(() => import("@/components/templates/CustomTemplate"))
 const EducationalTemplateRaw = dynamic(() => import("@/components/templates/EducationalTemplate"))
+const AttorneyTemplate = dynamic(() => import("@/components/templates/AttorneyTemplate"))
+const FinancialAdvisorTemplate = dynamic(() => import("@/components/templates/FinancialAdvisorTemplate"))
+const CPATemplate = dynamic(() => import("@/components/templates/CPATemplate"))
+const BookkeeperTemplate = dynamic(() => import("@/components/templates/BookkeeperTemplate"))
+const ConsultantTemplate = dynamic(() => import("@/components/templates/ConsultantTemplate"))
+const WorkflowTemplate = dynamic(() => import("@/components/templates/WorkflowTemplate"))
 
 // Wrapper that passes a sample topic to the educational template
 function EducationalPreview() {
@@ -29,6 +35,12 @@ const TEMPLATE_COMPONENTS: Record<string, React.ComponentType<{ template: (typeo
   "ecommerce": EcommerceTemplate,
   "custom": CustomTemplate,
   "educational": EducationalPreview as unknown as React.ComponentType<{ template: (typeof TEMPLATES)[number] }>,
+  "attorney": AttorneyTemplate,
+  "financial-advisor": FinancialAdvisorTemplate,
+  "cpa": CPATemplate,
+  "bookkeeper": BookkeeperTemplate,
+  "consultant": ConsultantTemplate,
+  "workflow": WorkflowTemplate,
 }
 
 export default function TemplatePage() {
