@@ -19,6 +19,7 @@ import {
   Manrope,
   Open_Sans,
   Inter,
+  Public_Sans,
 } from "next/font/google"
 import "./globals.css"
 
@@ -41,6 +42,7 @@ const darkerGrotesque = Darker_Grotesque({ subsets: ["latin"], variable: "--font
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" })
 const openSans = Open_Sans({ subsets: ["latin"], variable: "--font-open-sans", display: "swap" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
+const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-public-sans", display: "swap" })
 
 const fontVariables = [
   playfairDisplay.variable,
@@ -62,6 +64,7 @@ const fontVariables = [
   manrope.variable,
   openSans.variable,
   inter.variable,
+  publicSans.variable,
 ].join(" ")
 
 export const metadata: Metadata = {
