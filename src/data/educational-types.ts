@@ -1,3 +1,80 @@
+import { z } from 'zod/v4'
+
+// ---------------------------------------------------------------------------
+// Zod schemas (for AI-generated content validation)
+// ---------------------------------------------------------------------------
+
+export const SectionContentSchema = z.object({
+  title: z.string(),
+  subtitle: z.string().optional(),
+  paragraphs: z.array(z.string()),
+  bulletPoints: z.array(z.string()).optional(),
+  callout: z.string().optional(),
+})
+
+export const ResolutionOptionSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  whoQualifies: z.string(),
+  keyBenefit: z.string(),
+})
+
+export const ProcessStepSchema = z.object({
+  step: z.number(),
+  title: z.string(),
+  description: z.string(),
+  icon: z.string().optional(),
+})
+
+export const GlossaryTermSchema = z.object({
+  term: z.string(),
+  definition: z.string(),
+})
+
+export const RelatedTopicSchema = z.object({
+  title: z.string(),
+  slug: z.string(),
+  description: z.string(),
+})
+
+export const ReassuranceContentSchema = z.object({
+  title: z.string(),
+  message: z.string(),
+  bulletPoints: z.array(z.string()),
+})
+
+export const FAQItemSchema = z.object({
+  question: z.string(),
+  answer: z.string(),
+})
+
+export const EducationalTopicConfigSchema = z.object({
+  slug: z.string(),
+  vertical: z.string(),
+  topic: z.string(),
+  headline: z.string(),
+  subheadline: z.string(),
+  heroDescription: z.string(),
+  whatThisMeans: SectionContentSchema,
+  whyItHappens: SectionContentSchema,
+  whatHappensNext: SectionContentSchema,
+  commonQuestions: z.array(FAQItemSchema),
+  resolutionOptions: z.array(ResolutionOptionSchema),
+  whenToSeekHelp: SectionContentSchema,
+  howTheProcessWorks: z.array(ProcessStepSchema),
+  reassurance: ReassuranceContentSchema,
+  glossary: z.array(GlossaryTermSchema),
+  relatedTopics: z.array(RelatedTopicSchema),
+  disclaimer: z.string(),
+  primaryCTA: z.string(),
+  secondaryCTA: z.string(),
+  ctaMicrocopy: z.string(),
+})
+
+// ---------------------------------------------------------------------------
+// TypeScript interfaces (derived from schemas)
+// ---------------------------------------------------------------------------
+
 export interface SectionContent {
   readonly title: string
   readonly subtitle?: string

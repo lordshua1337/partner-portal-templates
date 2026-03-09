@@ -114,21 +114,37 @@ function StickyNav() {
             Templates
           </span>
         </div>
-        <Link
-          href="/auth"
-          style={{
-            padding: "8px 20px",
-            background: "var(--accent)",
-            color: "#fff",
-            borderRadius: 8,
-            fontSize: 14,
-            fontWeight: 600,
-            transition: "opacity var(--duration-micro) ease",
-            fontFamily: "var(--font-work-sans)",
-          }}
-        >
-          Sign In
-        </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <Link
+            href="/setup"
+            style={{
+              padding: "8px 16px",
+              color: "var(--text-secondary)",
+              borderRadius: 8,
+              fontSize: 14,
+              fontWeight: 500,
+              transition: "color var(--duration-micro) ease",
+              fontFamily: "var(--font-work-sans)",
+            }}
+          >
+            Deploy Your Own
+          </Link>
+          <Link
+            href="/auth"
+            style={{
+              padding: "8px 20px",
+              background: "var(--accent)",
+              color: "#fff",
+              borderRadius: 8,
+              fontSize: 14,
+              fontWeight: 600,
+              transition: "opacity var(--duration-micro) ease",
+              fontFamily: "var(--font-work-sans)",
+            }}
+          >
+            Sign In
+          </Link>
+        </div>
       </div>
     </nav>
   )
@@ -802,9 +818,17 @@ export default function HomePage() {
           textAlign: "center",
         }}
       >
-        <p style={{ fontSize: 13, color: "var(--text-muted)", fontFamily: "var(--font-work-sans)" }}>
-          Partner Portal Templates -- 6 landing pages + 10 educational authority pages
-        </p>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
+          <p style={{ fontSize: 13, color: "var(--text-muted)", fontFamily: "var(--font-work-sans)" }}>
+            Partner Portal Templates -- 7 landing pages + 10 educational authority pages
+          </p>
+          <Link
+            href="/setup"
+            style={{ fontSize: 13, color: "var(--accent-light)", fontFamily: "var(--font-work-sans)", fontWeight: 500 }}
+          >
+            Deploy Your Own
+          </Link>
+        </div>
       </footer>
     </div>
   )

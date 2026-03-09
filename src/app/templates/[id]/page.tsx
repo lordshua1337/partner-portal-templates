@@ -4,6 +4,7 @@ import { useParams } from "next/navigation"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 import { TEMPLATES } from "@/data/templates"
+import { getTopicBySlug } from "@/data/topics/tax-resolution"
 
 const LeadGenTemplate = dynamic(() => import("@/components/templates/LeadGenTemplate"))
 const SaaSTemplate = dynamic(() => import("@/components/templates/SaaSTemplate"))
@@ -11,6 +12,14 @@ const B2BTemplate = dynamic(() => import("@/components/templates/B2BTemplate"))
 const EventTemplate = dynamic(() => import("@/components/templates/EventTemplate"))
 const EcommerceTemplate = dynamic(() => import("@/components/templates/EcommerceTemplate"))
 const CustomTemplate = dynamic(() => import("@/components/templates/CustomTemplate"))
+const EducationalTemplateRaw = dynamic(() => import("@/components/templates/EducationalTemplate"))
+
+// Wrapper that passes a sample topic to the educational template
+function EducationalPreview() {
+  const sampleTopic = getTopicBySlug("offer-in-compromise")
+  if (!sampleTopic) return <div style={{ padding: 80, textAlign: "center", color: "#64748B" }}>No sample topic found</div>
+  return <EducationalTemplateRaw topic={sampleTopic} />
+}
 
 const TEMPLATE_COMPONENTS: Record<string, React.ComponentType<{ template: (typeof TEMPLATES)[number] }>> = {
   "lead-gen": LeadGenTemplate,
@@ -19,6 +28,7 @@ const TEMPLATE_COMPONENTS: Record<string, React.ComponentType<{ template: (typeo
   "event": EventTemplate,
   "ecommerce": EcommerceTemplate,
   "custom": CustomTemplate,
+  "educational": EducationalPreview as unknown as React.ComponentType<{ template: (typeof TEMPLATES)[number] }>,
 }
 
 export default function TemplatePage() {
