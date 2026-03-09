@@ -20,6 +20,8 @@ import {
   Open_Sans,
   Inter,
   Public_Sans,
+  Rubik,
+  Urbanist,
 } from "next/font/google"
 import "./globals.css"
 
@@ -43,6 +45,8 @@ const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", displa
 const openSans = Open_Sans({ subsets: ["latin"], variable: "--font-open-sans", display: "swap" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
 const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-public-sans", display: "swap" })
+const rubik = Rubik({ subsets: ["latin"], variable: "--font-rubik", display: "swap" })
+const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist", display: "swap" })
 
 const fontVariables = [
   playfairDisplay.variable,
@@ -65,6 +69,8 @@ const fontVariables = [
   openSans.variable,
   inter.variable,
   publicSans.variable,
+  rubik.variable,
+  urbanist.variable,
 ].join(" ")
 
 export const metadata: Metadata = {
