@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import * as Accordion from "@radix-ui/react-accordion"
 import type { TemplateConfig } from "@/data/templates"
 import FadeIn from "@/components/motion/FadeIn"
-import CountUp from "@/components/motion/CountUp"
 
 const GOLD = "#FFC947"
 const DARK = "#12141D"
@@ -34,17 +33,30 @@ const BULLET_POINTS = [
   "Contingency fee — no win, no fee",
 ]
 
+const accordionContentStyles = `
+  .attorney-accordion-content[data-state="open"] {
+    animation: accordionSlideDown 200ms ease-out;
+  }
+  .attorney-accordion-content[data-state="closed"] {
+    animation: accordionSlideUp 200ms ease-out;
+  }
+  @keyframes accordionSlideDown {
+    from { height: 0; opacity: 0; }
+    to { height: var(--radix-accordion-content-height); opacity: 1; }
+  }
+  @keyframes accordionSlideUp {
+    from { height: var(--radix-accordion-content-height); opacity: 1; }
+    to { height: 0; opacity: 0; }
+  }
+`
+
 export default function AttorneyTemplate({ template: t }: { readonly template: TemplateConfig }) {
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
   const displayFont = "'Space Grotesk', sans-serif"
   const bodyFont = "'Inter', sans-serif"
 
-  const handleFaqToggle = (i: number) => {
-    setOpenFaq(prev => (prev === i ? null : i))
-  }
-
   return (
     <div style={{ minHeight: "100vh", background: LIGHT, color: "#111", fontFamily: bodyFont }}>
+      <style dangerouslySetInnerHTML={{ __html: accordionContentStyles }} />
 
       {/* SECTION 1: Hero — dark, full-width, left-aligned text + floating geo shapes */}
       <section style={{
@@ -93,7 +105,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
         </div>
 
         {/* Text content — left-aligned, ~60% width */}
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "100px 48px", width: "100%" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 24px", width: "100%" }}>
           <FadeIn direction="left">
             <div style={{ maxWidth: 620 }}>
               {/* Gold accent line above headline */}
@@ -180,7 +192,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
               fontWeight: 600,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#999",
+              color: "#666",
               fontFamily: displayFont,
             }}>
               {badge}
@@ -189,9 +201,16 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
         </div>
       </section>
 
-      {/* SECTION 3: Practice Areas — FAFAFA, left-aligned title, 2-col layout */}
+      {/* SECTION 3: Practice Areas — FAFAFA, left-aligned title, responsive 2-col layout */}
       <section style={{ background: LIGHT, padding: "100px 24px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
+        <div style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))",
+          gap: 80,
+          alignItems: "start",
+        }}>
           {/* Left: large label text + gold bar */}
           <FadeIn direction="left">
             <div>
@@ -248,7 +267,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
                   }}>
                     {area.title}
                   </span>
-                  <span style={{ fontSize: 14, color: "#777", lineHeight: 1.5 }}>
+                  <span style={{ fontSize: 14, color: "#555", lineHeight: 1.5 }}>
                     {area.description}
                   </span>
                 </div>
@@ -274,7 +293,11 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
               Case Results
             </p>
           </FadeIn>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
+            gap: 0,
+          }}>
             {CASE_RESULTS.map((result, i) => (
               <FadeIn key={result.type} delay={i * 0.1}>
                 <div style={{
@@ -304,7 +327,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
                   }}>
                     {result.type}
                   </div>
-                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
+                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", lineHeight: 1.5 }}>
                     {result.detail}
                   </div>
                 </div>
@@ -320,7 +343,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
           maxWidth: 1100,
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))",
           gap: 80,
           alignItems: "center",
         }}>
@@ -426,7 +449,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
               marginBottom: -16,
               opacity: 0.8,
             }}>
-              "
+              &ldquo;
             </div>
 
             {t.testimonials[0] && (
@@ -455,7 +478,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
                 }}>
                   {t.testimonials[0].name}
                 </div>
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
                   {t.testimonials[0].role}
                 </div>
               </>
@@ -464,7 +487,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
         </div>
       </section>
 
-      {/* SECTION 7: FAQ — FAFAFA, custom accordion with useState */}
+      {/* SECTION 7: FAQ — FAFAFA, Radix Accordion */}
       <section style={{ background: LIGHT, padding: "100px 24px" }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <FadeIn>
@@ -492,54 +515,66 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
             </div>
           </FadeIn>
 
-          {t.faq.map((item, i) => (
-            <FadeIn key={item.question} delay={i * 0.05}>
-              <div style={{ borderTop: "1px solid #E0E0E0" }}>
-                <button
-                  onClick={() => handleFaqToggle(i)}
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "24px 0",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    textAlign: "left",
-                    gap: 16,
-                  }}
-                >
-                  <span style={{
-                    fontSize: 16,
-                    fontWeight: 600,
-                    color: DARK,
-                    fontFamily: displayFont,
-                    lineHeight: 1.4,
-                  }}>
-                    {item.question}
-                  </span>
-                  <span style={{
-                    fontSize: 24,
-                    fontWeight: 300,
-                    color: GOLD,
-                    fontFamily: displayFont,
-                    flexShrink: 0,
-                    lineHeight: 1,
-                  }}>
-                    {openFaq === i ? "−" : "+"}
-                  </span>
-                </button>
-                {openFaq === i && (
-                  <div style={{ paddingBottom: 24 }}>
-                    <p style={{ fontSize: 15, color: "#555", lineHeight: 1.8, margin: 0 }}>
-                      {item.answer}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </FadeIn>
-          ))}
+          <Accordion.Root type="single" collapsible>
+            {t.faq.map((item, i) => (
+              <FadeIn key={item.question} delay={i * 0.05}>
+                <Accordion.Item value={`faq-${i}`} style={{ borderTop: "1px solid #E0E0E0" }}>
+                  <Accordion.Header asChild>
+                    <h3 style={{ margin: 0 }}>
+                      <Accordion.Trigger
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          padding: "24px 0",
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          textAlign: "left",
+                          gap: 16,
+                        }}
+                      >
+                        <span style={{
+                          fontSize: 16,
+                          fontWeight: 600,
+                          color: DARK,
+                          fontFamily: displayFont,
+                          lineHeight: 1.4,
+                        }}>
+                          {item.question}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: 24,
+                            fontWeight: 300,
+                            color: GOLD,
+                            fontFamily: displayFont,
+                            flexShrink: 0,
+                            lineHeight: 1,
+                            transition: "transform 200ms ease",
+                          }}
+                          aria-hidden
+                        >
+                          +
+                        </span>
+                      </Accordion.Trigger>
+                    </h3>
+                  </Accordion.Header>
+                  <Accordion.Content
+                    className="attorney-accordion-content"
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div style={{ paddingBottom: 24 }}>
+                      <p style={{ fontSize: 15, color: "#555", lineHeight: 1.8, margin: 0 }}>
+                        {item.answer}
+                      </p>
+                    </div>
+                  </Accordion.Content>
+                </Accordion.Item>
+              </FadeIn>
+            ))}
+          </Accordion.Root>
           <div style={{ borderTop: "1px solid #E0E0E0" }} />
         </div>
       </section>
@@ -592,7 +627,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
       {/* SECTION 9: Footer — slightly lighter dark, two-column */}
       <footer style={{
         background: DARK_FOOTER,
-        padding: "40px 48px",
+        padding: "40px 24px",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -612,7 +647,7 @@ export default function AttorneyTemplate({ template: t }: { readonly template: T
           {["Privacy Policy", "Terms of Use", "Disclaimer", "Contact"].map(link => (
             <a key={link} href="#" style={{
               fontSize: 13,
-              color: "rgba(255,255,255,0.45)",
+              color: "rgba(255,255,255,0.65)",
               textDecoration: "none",
               letterSpacing: "0.04em",
               fontFamily: bodyFont,
