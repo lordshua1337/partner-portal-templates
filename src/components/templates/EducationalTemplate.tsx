@@ -14,6 +14,8 @@ import ReassuranceBlock from "@/components/sections/ReassuranceBlock"
 import RelatedTopics from "@/components/sections/RelatedTopics"
 import FAQ from "@/components/sections/FAQ"
 import CTABanner from "@/components/sections/CTABanner"
+import { Suspense } from "react"
+import BrandedFooter from "@/components/sections/BrandedFooter"
 
 interface EducationalTemplateProps {
   readonly topic: EducationalTopicConfig
@@ -397,36 +399,16 @@ export default function EducationalTemplate({ topic: t }: EducationalTemplatePro
         displayFont={df}
       />
 
-      {/* Disclaimer + Footer */}
-      <footer
-        style={{
-          padding: "32px 24px",
-          background: C.surface,
-          borderTop: `1px solid ${C.border}`,
-        }}
-      >
-        <div style={{ maxWidth: 768, margin: "0 auto" }}>
-          <p
-            style={{
-              fontSize: 12,
-              color: "#555",
-              lineHeight: 1.6,
-              marginBottom: 16,
-            }}
-          >
-            {t.disclaimer}
-          </p>
-          <p
-            style={{
-              fontSize: 12,
-              color: "#555",
-              textAlign: "center",
-            }}
-          >
-            Educational Authority Template -- Partner Portal Templates
-          </p>
-        </div>
-      </footer>
+      {/* Branded Footer */}
+      <Suspense fallback={
+        <footer style={{ padding: "32px 24px", background: C.surface, borderTop: `1px solid ${C.border}` }}>
+          <div style={{ maxWidth: 768, margin: "0 auto" }}>
+            <p style={{ fontSize: 12, color: "#555", lineHeight: 1.6 }}>{t.disclaimer}</p>
+          </div>
+        </footer>
+      }>
+        <BrandedFooter disclaimer={t.disclaimer} />
+      </Suspense>
     </div>
   )
 }
